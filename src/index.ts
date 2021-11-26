@@ -16,7 +16,8 @@ const main = () => {
         success: 'Message was sent!',
       });
     } catch (e: any) {
-      res.status(e.responseCode).json(e);
+      console.log(e);
+      res.status(500).json(e);
     }
   });
 
