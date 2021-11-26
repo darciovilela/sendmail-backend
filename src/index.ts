@@ -7,14 +7,15 @@ const port = 4000;
 const main = () => {
   const app = express();
   app.use(cors());
+  app.use(express.json());
 
-  app.get('/send', async (req: Request, res: Response) => {
+  app.post('/send', async (req: Request, res: Response) => {
     try {
-      await sendMail(req.query.to as string);
+      await sendMail(req.body);
       res.json({
         success: 'Message was sent!',
       });
-    } catch (e) {
+    } catch (e: any) {
       res.status(e.responseCode).json(e);
     }
   });
